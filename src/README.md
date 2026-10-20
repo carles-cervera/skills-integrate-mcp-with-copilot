@@ -48,3 +48,17 @@ The application uses a simple data model with meaningful identifiers:
    - Grade level
 
 All data is stored in memory, which means data will be reset when the server restarts.
+
+## Teacher access
+
+Only authenticated teachers can register or unregister students. Activity details and participant lists remain visible to everyone.
+
+Create a teacher account with:
+
+```
+python -m src.manage_teachers
+```
+
+The command writes a salted password hash to `src/teachers.json`; no plaintext password is stored. The JSON file is checked in so assigned teacher accounts can be shared with the deployment. Set a stable, random `SESSION_SECRET` environment variable when running the application. Set `SESSION_COOKIE_SECURE=true` when serving over HTTPS.
+
+Teacher sessions expire after eight hours. There is no in-app account maintenance page; add assigned accounts through the command-line tool.
